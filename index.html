@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Stack Roblox Developer — Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #09090b;
+            color: #fafafa;
+            -webkit-font-smoothing: antialiased;
+        }
+        .subtle-grid {
+            background-size: 48px 48px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        }
+        .card {
+            background: rgba(24, 24, 27, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(24, 24, 27, 0.85);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="subtle-grid min-h-screen selection:bg-white/20 selection:text-white relative">
+
+    <!-- Subtle Top Radial Spotlight -->
+    <div class="pointer-events-none fixed inset-x-0 top-0 h-[420px] bg-[radial-gradient(ellipse_60%_50%_at_50%_-10%,rgba(120,119,198,0.15),transparent)]"></div>
+
+    <!-- Subtle Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 translate-y-12 opacity-0 pointer-events-none transition-all duration-200">
+        <div class="bg-zinc-900 border border-white/15 text-zinc-100 px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-mono">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+            <span id="toast-text">Copied to clipboard</span>
+        </div>
+    </div>
+
+    <!-- Minimal Header -->
+    <header class="sticky top-0 z-40 border-b border-white/[0.06] bg-[#09090b]/80 backdrop-blur-md">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="font-mono text-sm font-medium tracking-tight text-zinc-100 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>roblox.systems</span>
+            </a>
+
+            <nav class="hidden sm:flex items-center gap-6 text-sm text-zinc-400">
+                <a href="#games" class="hover:text-zinc-100 transition-colors">Games</a>
+                <a href="#systems" class="hover:text-zinc-100 transition-colors">Systems</a>
+                <a href="#contact" class="hover:text-zinc-100 transition-colors">Contact</a>
+            </nav>
+
+            <button onclick="copyText('pog0834', 'Discord copied: pog0834')" class="text-xs font-mono px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-zinc-200 flex items-center gap-2 transition-colors">
+                <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 -28.5 256 256" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" aria-hidden="true"><path d="M216.856339,16.5966031 C200.285002,8.84328665 182.566144,3.2084988 164.041564,0 C161.766523,4.11318106 159.108624,9.64549908 157.276099,14.0464379 C137.583995,11.0849896 118.072967,11.0849896 98.7430163,14.0464379 C96.9108417,9.64549908 94.1925838,4.11318106 91.8971895,0 C73.3526068,3.2084988 55.6133949,8.86399117 39.0420583,16.6376612 C5.61752293,67.146514 -3.4433191,116.400813 1.08711069,164.955721 C23.2560196,181.510915 44.7403634,191.567697 65.8621325,198.148576 C71.0772151,190.971126 75.7283628,183.341335 79.7352139,175.300261 C72.104019,172.400575 64.7949724,168.822202 57.8887866,164.667963 C59.7209612,163.310589 61.5131304,161.891452 63.2445898,160.431257 C105.36741,180.133187 151.134928,180.133187 192.754523,160.431257 C194.506336,161.891452 196.298154,163.310589 198.110326,164.667963 C191.183787,168.842556 183.854737,172.420929 176.223542,175.320965 C180.230393,183.341335 184.861538,190.991831 190.096624,198.16893 C211.238746,191.588051 232.743023,181.531619 254.911949,164.955721 C260.227747,108.668201 245.831087,59.8662432 216.856339,16.5966031 Z M85.4738752,135.09489 C72.8290281,135.09489 62.4592217,123.290155 62.4592217,108.914901 C62.4592217,94.5396472 72.607595,82.7145587 85.4738752,82.7145587 C98.3405064,82.7145587 108.709962,94.5189427 108.488529,108.914901 C108.508531,123.290155 98.3405064,135.09489 85.4738752,135.09489 Z M170.525237,135.09489 C157.88039,135.09489 147.510584,123.290155 147.510584,108.914901 C147.510584,94.5396472 157.658606,82.7145587 170.525237,82.7145587 C183.391518,82.7145587 193.761324,94.5189427 193.539891,108.914901 C193.539891,123.290155 183.391518,135.09489 170.525237,135.09489 Z" fill="#5865F2" fill-rule="nonzero"/></svg>
+                <span>pog0834</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 pt-16 pb-24 space-y-24 relative z-10">
+
+        <!-- 1. HERO SECTION -->
+        <section class="space-y-10">
+            <div class="max-w-3xl space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Available for Projects & Commissions</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white leading-[1.15]">
+                Full Stack Roblox Developer
+            </h1>
+
+            <p class="text-zinc-400 text-base sm:text-lg leading-relaxed">
+                Specializing in scalable data architecture, reactive state replication, end-to-end UI/UX flows, lobby orchestration, telemetry analytics, and client memory/performance optimization.
+            </p>
+            </div>
+
+            <!-- Featured Games (full width) -->
+            <div id="games" class="scroll-mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+                <!-- Game 1: Survive 99 Zombies Waves -->
+                <article class="card rounded-2xl overflow-hidden flex flex-col justify-between group">
+                    <div>
+                        <a href="https://www.roblox.com/share?code=1bf26429c3ffdd47b20758d58096256e&type=ExperienceDetails&stamp=1793116958345" target="_blank" rel="noopener noreferrer" class="block relative aspect-video overflow-hidden bg-zinc-900 border-b border-white/[0.06]">
+                            <img 
+                                src="https://tr.rbxcdn.com/180DAY-e5c72e6dda103402b51f1fb7bb61468b/768/432/Image/Webp/noFilter" 
+                                alt="Survive 99 Zombies Waves Thumbnail" 
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                                onerror="this.onerror=null;this.src='https://placehold.co/768x432/18181b/a1a1aa?text=Survive+99+Zombies+Waves';"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent"></div>
+                            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-md text-xs font-mono bg-zinc-950/80 backdrop-blur-md text-rose-300 border border-rose-500/30">
+                                Survival
+                            </span>
+                            <span class="absolute bottom-3 right-3 text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-950/80 backdrop-blur-md text-zinc-300 border border-white/10">
+                                6/6 Systems
+                            </span>
+                        </a>
+
+                        <div class="p-5 space-y-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white tracking-tight group-hover:text-emerald-300 transition-colors">Survive 99 Zombies Waves</h3>
+                                <p class="text-sm text-zinc-400 mt-1.5 leading-relaxed">
+                                    Wave-based survival experience engineered with party lobby matchmaking, real-time combat HUD replication, wave telemetry, and strict client memory pooling for high-entity hordes.
+                                </p>
+                            </div>
+
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Data Schema</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Reactive Sync</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Full UI/UX</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Lobby Service</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Analytics</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Perf / RAM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-5 py-4 border-t border-white/[0.06] bg-white/[0.01] flex items-center justify-between">
+                        <a href="https://www.roblox.com/share?code=1bf26429c3ffdd47b20758d58096256e&type=ExperienceDetails&stamp=1793116958345" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-200 hover:text-white transition-colors w-full justify-between">
+                            <span>Play on Roblox</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Game 2: Hunt Giant Fish -->
+                <article class="card rounded-2xl overflow-hidden flex flex-col justify-between group">
+                    <div>
+                        <a href="https://www.roblox.com/share?code=3f7de6e5ff36dc4ab988836213c6599d&type=ExperienceDetails&stamp=1793116975945" target="_blank" rel="noopener noreferrer" class="block relative aspect-video overflow-hidden bg-zinc-900 border-b border-white/[0.06]">
+                            <img 
+                                src="https://tr.rbxcdn.com/180DAY-85bad2d7724aabbb1495c41f744b0ec5/768/432/Image/Webp/noFilter" 
+                                alt="Hunt Giant Fish Thumbnail" 
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                                onerror="this.onerror=null;this.src='https://placehold.co/768x432/18181b/a1a1aa?text=Hunt+Giant+Fish';"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent"></div>
+                            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-md text-xs font-mono bg-zinc-950/80 backdrop-blur-md text-sky-300 border border-sky-500/30">
+                                Simulation
+                            </span>
+                            <span class="absolute bottom-3 right-3 text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-950/80 backdrop-blur-md text-zinc-300 border border-white/10">
+                                6/6 Systems
+                            </span>
+                        </a>
+
+                        <div class="p-5 space-y-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white tracking-tight group-hover:text-emerald-300 transition-colors">Hunt Giant Fish</h3>
+                                <p class="text-sm text-zinc-400 mt-1.5 leading-relaxed">
+                                    Deep-sea simulation featuring scalable inventory/progression schemas, reactive catch and upgrade UI flows, economy sink/source analytics, and optimized water/entity rendering performance.
+                                </p>
+                            </div>
+
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Data Schema</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Reactive Sync</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Full UI/UX</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Lobby Service</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Analytics</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Perf / RAM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-5 py-4 border-t border-white/[0.06] bg-white/[0.01] flex items-center justify-between">
+                        <a href="https://www.roblox.com/share?code=3f7de6e5ff36dc4ab988836213c6599d&type=ExperienceDetails&stamp=1793116975945" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-200 hover:text-white transition-colors w-full justify-between">
+                            <span>Play on Roblox</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Game 3: UGC Anime Face Creator -->
+                <article class="card rounded-2xl overflow-hidden flex flex-col justify-between group">
+                    <div>
+                        <a href="https://www.roblox.com/share?code=d434d7298cd18f40b3b90d09ffc69bd8&type=ExperienceDetails&stamp=1793116994017" target="_blank" rel="noopener noreferrer" class="block relative aspect-video overflow-hidden bg-zinc-900 border-b border-white/[0.06]">
+                            <img 
+                                src="https://tr.rbxcdn.com/180DAY-473c8294e3406ca3acd983147214c559/768/432/Image/Webp/noFilter" 
+                                alt="UGC Anime Face Creator Thumbnail" 
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                                onerror="this.onerror=null;this.src='https://placehold.co/768x432/18181b/a1a1aa?text=UGC+Anime+Face+Creator';"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent"></div>
+                            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-md text-xs font-mono bg-zinc-950/80 backdrop-blur-md text-purple-300 border border-purple-500/30">
+                                UGC
+                            </span>
+                            <span class="absolute bottom-3 right-3 text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-950/80 backdrop-blur-md text-zinc-300 border border-white/10">
+                                6/6 Systems
+                            </span>
+                        </a>
+
+                        <div class="p-5 space-y-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white tracking-tight group-hover:text-emerald-300 transition-colors">UGC Anime Face Creator</h3>
+                                <p class="text-sm text-zinc-400 mt-1.5 leading-relaxed">
+                                    Interactive UGC customization studio with serialized preset schemas, instant reactive editor UI/UX, conversion funnel analytics, and aggressive texture/asset RAM management.
+                                </p>
+                            </div>
+
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Data Schema</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Reactive Sync</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Full UI/UX</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Lobby Service</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Analytics</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-zinc-300 border border-white/[0.06]">Perf / RAM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-5 py-4 border-t border-white/[0.06] bg-white/[0.01] flex items-center justify-between">
+                        <a href="https://www.roblox.com/share?code=d434d7298cd18f40b3b90d09ffc69bd8&type=ExperienceDetails&stamp=1793116994017" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-200 hover:text-white transition-colors w-full justify-between">
+                            <span>Play on Roblox</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-zinc-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. WHAT I DO / CORE SYSTEMS (CLEAN 3x2 GRID) -->
+        <section id="systems" class="scroll-mt-24 space-y-6">
+            <div>
+                <h2 class="text-xl font-semibold text-white tracking-tight">Core Systems</h2>
+                <p class="text-sm text-zinc-400 mt-1">Production-tested engineering pillars built across every project.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- 1. Data Schema Design -->
+                <div class="card rounded-2xl p-5 space-y-2.5">
+                    <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-200">
+                        <i data-lucide="database" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-base font-semibold text-white">Data Schema Design</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        Scalable player data structures, strict validation, version migration, and session-locking.
+                    </p>
+                </div>
+
+                <!-- 2. Reactive Data Replication -->
+                <div class="card rounded-2xl p-5 space-y-2.5">
+                    <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-200">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-base font-semibold text-white">Reactive Data Replication</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        Low-bandwidth server-to-client state sync driving instant, event-driven updates.
+                    </p>
+                </div>
+
+                <!-- 3. Full UI/UX Flow -->
+                <div class="card rounded-2xl p-5 space-y-2.5">
+                    <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-200">
+                        <i data-lucide="layout" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-base font-semibold text-white">Full UI/UX Flow</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        Responsive, cross-device interfaces with smooth animations and reactive state binding.
+                    </p>
+                </div>
+
+                <!-- 4. Lobby & Matchmaking Service -->
+                <div class="card rounded-2xl p-5 space-y-2.5">
+                    <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-200">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-base font-semibold text-white">Lobby &amp; Matchmaking Service</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        Cross-server party orchestration, queue management, and reliable player routing.
+                    </p>
+                </div>
+
+                <!-- 5. User Behavior & Analytics -->
+                <div class="card rounded-2xl p-5 space-y-2.5">
+                    <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-200">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-base font-semibold text-white">User Behavior &amp; Analytics</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        Custom telemetry pipelines and funnel tracking to optimize retention and game economy.
+                    </p>
+                </div>
+
+                <!-- 6. Performance & RAM Optimization -->
+                <div class="card rounded-2xl p-5 space-y-2.5">
+                    <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-200">
+                        <i data-lucide="cpu" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-base font-semibold text-white">Performance &amp; RAM Optimization</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">
+                        Client memory profiling, instance pooling, and garbage collection management for low-end devices.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. MINIMAL CONTACT BANNER -->
+        <section id="contact" class="scroll-mt-24 pt-4">
+            <div class="card rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                <div class="space-y-1.5">
+                    <h2 class="text-lg font-semibold text-white">Let's build together</h2>
+                    <p class="text-sm text-zinc-400">Reach out directly via Discord or Email for commissions and roles.</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <button onclick="copyText('pog0834', 'Discord copied: pog0834')" class="px-4 py-2 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 font-medium text-xs sm:text-sm flex items-center gap-2 transition-colors">
+                        <svg class="w-4 h-4 shrink-0" viewBox="0 -28.5 256 256" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" aria-hidden="true"><path d="M216.856339,16.5966031 C200.285002,8.84328665 182.566144,3.2084988 164.041564,0 C161.766523,4.11318106 159.108624,9.64549908 157.276099,14.0464379 C137.583995,11.0849896 118.072967,11.0849896 98.7430163,14.0464379 C96.9108417,9.64549908 94.1925838,4.11318106 91.8971895,0 C73.3526068,3.2084988 55.6133949,8.86399117 39.0420583,16.6376612 C5.61752293,67.146514 -3.4433191,116.400813 1.08711069,164.955721 C23.2560196,181.510915 44.7403634,191.567697 65.8621325,198.148576 C71.0772151,190.971126 75.7283628,183.341335 79.7352139,175.300261 C72.104019,172.400575 64.7949724,168.822202 57.8887866,164.667963 C59.7209612,163.310589 61.5131304,161.891452 63.2445898,160.431257 C105.36741,180.133187 151.134928,180.133187 192.754523,160.431257 C194.506336,161.891452 196.298154,163.310589 198.110326,164.667963 C191.183787,168.842556 183.854737,172.420929 176.223542,175.320965 C180.230393,183.341335 184.861538,190.991831 190.096624,198.16893 C211.238746,191.588051 232.743023,181.531619 254.911949,164.955721 C260.227747,108.668201 245.831087,59.8662432 216.856339,16.5966031 Z M85.4738752,135.09489 C72.8290281,135.09489 62.4592217,123.290155 62.4592217,108.914901 C62.4592217,94.5396472 72.607595,82.7145587 85.4738752,82.7145587 C98.3405064,82.7145587 108.709962,94.5189427 108.488529,108.914901 C108.508531,123.290155 98.3405064,135.09489 85.4738752,135.09489 Z M170.525237,135.09489 C157.88039,135.09489 147.510584,123.290155 147.510584,108.914901 C147.510584,94.5396472 157.658606,82.7145587 170.525237,82.7145587 C183.391518,82.7145587 193.761324,94.5189427 193.539891,108.914901 C193.539891,123.290155 183.391518,135.09489 170.525237,135.09489 Z" fill="#5865F2" fill-rule="nonzero"/></svg>
+                        <span class="font-mono">pog0834</span>
+                        <i data-lucide="copy" class="w-3.5 h-3.5 opacity-60"></i>
+                    </button>
+
+                    <button onclick="copyText('hothanhan51@gmail.com', 'Email copied: hothanhan51@gmail.com')" class="px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-zinc-200 font-medium text-xs sm:text-sm flex items-center gap-2 transition-colors">
+                        <i data-lucide="mail" class="w-4 h-4 text-zinc-400"></i>
+                        <span class="font-mono">hothanhan51@gmail.com</span>
+                        <i data-lucide="copy" class="w-3.5 h-3.5 text-zinc-500"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="border-t border-white/[0.06] py-8">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
+            <span>Full Stack Roblox Developer</span>
+            <span>Discord: pog0834 • hothanhan51@gmail.com</span>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        let toastTimer = null;
+        function copyText(value, message) {
+            const input = document.createElement('textarea');
+            input.value = value;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            toastText.textContent = message;
+
+            toast.classList.remove('translate-y-12', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-12', 'opacity-0');
+            }, 2200);
+        }
+    </script>
+</body>
+</html>
